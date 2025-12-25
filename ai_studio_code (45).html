@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário Estratégico - Cambo</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 { color: var(--primary); text-align: center; margin-bottom: 10px; }
+        p.subtitle { text-align: center; color: #64748b; margin-bottom: 30px; }
+
+        .section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .question-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        textarea { height: 80px; resize: vertical; }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .option-item input { margin-right: 10px; }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover { background-color: #1d4ed8; }
+
+        #result-container {
+            margin-top: 40px;
+            display: none;
+        }
+
+        #final-text {
+            width: 100%;
+            height: 400px;
+            padding: 20px;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+
+        .copy-btn {
+            background-color: #10b981;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover { background-color: #059669; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Questionário Cambo</h1>
+    <p class="subtitle">Responda com calma para definir a estratégia do seu negócio.</p>
+
+    <form id="quizForm">
+        <!-- SEÇÃO 1 -->
+        <div class="section">
+            <div class="section-title">1. Propósito e Visão</div>
+            <div class="question-group">
+                <label>Por que você criou (ou quer criar) essa empresa?</label>
+                <textarea name="q1"></textarea>
+            </div>
+            <div class="question-group">
+                <label>O que você quer que as pessoas sintam quando veem sua marca?</label>
+                <textarea name="q2"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Onde você quer que essa empresa esteja em 1 ano?</label>
+                <input type="text" name="q3">
+            </div>
+            <div class="question-group">
+                <label>E em 5 anos?</label>
+                <input type="text" name="q4">
+            </div>
+            <div class="question-group">
+                <label>Você quer uma empresa pessoal ou institucional?</label>
+                <select name="q5">
+                    <option value="Pessoal (ligada à minha imagem)">Pessoal (ligada à minha imagem)</option>
+                    <option value="Institucional (que funciona sem eu aparecer)">Institucional (que funciona sem eu aparecer)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 2 -->
+        <div class="section">
+            <div class="section-title">2. Tipo de Cliente</div>
+            <div class="question-group">
+                <label>Quem é o cliente ideal hoje?</label>
+                <textarea name="q6"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Que tipo de cliente você não quer atender de jeito nenhum?</label>
+                <textarea name="q7"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Volume ou Valor?</label>
+                <select name="q8">
+                    <option value="Poucos clientes pagando mais">Poucos clientes pagando mais</option>
+                    <option value="Muitos clientes pagando menos">Muitos clientes pagando menos</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Nível de consciência do cliente:</label>
+                <select name="q9">
+                    <option value="Entende de marketing">Entende de marketing</option>
+                    <option value="Totalmente leigo">Totalmente leigo</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Motivação de compra:</label>
+                <select name="q10">
+                    <option value="Urgência (vender agora)">Urgência (vender agora)</option>
+                    <option value="Crescimento estratégico">Crescimento estratégico</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 3 -->
+        <div class="section">
+            <div class="section-title">3. Serviços & Foco</div>
+            <div class="question-group">
+                <label>Quais serviços você quer oferecer no curto prazo?</label>
+                <textarea name="q11"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Qual serviço você mais gosta de executar?</label>
+                <input type="text" name="q12">
+            </div>
+            <div class="question-group">
+                <label>Qual serviço você acha que mais dá dinheiro hoje?</label>
+                <input type="text" name="q13">
+            </div>
+            <div class="question-group">
+                <label>Modelo de atuação:</label>
+                <select name="q14">
+                    <option value="Especialista em uma coisa">Especialista em uma coisa</option>
+                    <option value="Agência full service">Agência full service</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Foco principal:</label>
+                <select name="q15">
+                    <option value="Execução">Execução</option>
+                    <option value="Estratégia">Estratégia</option>
+                    <option value="Ambos">Ambos</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 4 -->
+        <div class="section">
+            <div class="section-title">4. Posicionamento & Personalidade</div>
+            <div class="question-group">
+                <label>Sua marca é mais (selecione as que desejar):</label>
+                <div class="options-grid">
+                    <label class="option-item"><input type="checkbox" name="q16" value="Autoridade"> Autoridade</label>
+                    <label class="option-item"><input type="checkbox" name="q16" value="Próxima"> Próxima</label>
+                    <label class="option-item"><input type="checkbox" name="q16" value="Premium"> Premium</label>
+                    <label class="option-item"><input type="checkbox" name="q16" value="Agressiva"> Agressiva</label>
+                    <label class="option-item"><input type="checkbox" name="q16" value="Educadora"> Educadora</label>
+                    <label class="option-item"><input type="checkbox" name="q16" value="Criativa"> Criativa</label>
+                </div>
+            </div>
+            <div class="question-group">
+                <label>Se sua marca fosse uma pessoa, como ela falaria?</label>
+                <textarea name="q17"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Preferência de comunicação:</label>
+                <select name="q18">
+                    <option value="Direta e reta">Direta e reta</option>
+                    <option value="Técnica">Técnica</option>
+                    <option value="Motivacional">Motivacional</option>
+                    <option value="Simples">Simples</option>
+                    <option value="Provocativa">Provocativa</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Marcas que admira o posicionamento:</label>
+                <input type="text" name="q19">
+            </div>
+            <div class="question-group">
+                <label>O que diferencia sua empresa das outras?</label>
+                <textarea name="q20"></textarea>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 5 -->
+        <div class="section">
+            <div class="section-title">5. Conteúdo & Imagem</div>
+            <div class="question-group">
+                <label>Você quer aparecer nos conteúdos?</label>
+                <select name="q21">
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                    <option value="Às vezes">Às vezes</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Formato de vídeo:</label>
+                <select name="q22">
+                    <option value="Curtos">Curtos</option>
+                    <option value="Longos">Longos</option>
+                    <option value="Ambos">Ambos</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Objetivo do conteúdo:</label>
+                <input type="text" name="q23" placeholder="Ex: Ensinar, vender, inspirar...">
+            </div>
+            <div class="question-group">
+                <label>Crescimento por:</label>
+                <select name="q24">
+                    <option value="Autoridade">Autoridade</option>
+                    <option value="Volume/Viral">Volume/Viral</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Rede social prioridade:</label>
+                <input type="text" name="q25">
+            </div>
+        </div>
+
+        <!-- SEÇÃO 6 -->
+        <div class="section">
+            <div class="section-title">6. Vendas & Relacionamento</div>
+            <div class="question-group">
+                <label>Canal de vendas principal:</label>
+                <input type="text" name="q26" placeholder="WhatsApp, call, site, DM...">
+            </div>
+            <div class="question-group">
+                <label>Você gosta de vender ou prefere que o conteúdo venda?</label>
+                <textarea name="q27"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Ticket médio ideal:</label>
+                <div class="options-grid">
+                    <label class="option-item"><input type="radio" name="q28" value="Até R$500"> Até R$500</label>
+                    <label class="option-item"><input type="radio" name="q28" value="R$500 – R$1.500"> R$500–R$1.500</label>
+                    <label class="option-item"><input type="radio" name="q28" value="R$1.500 – R$5.000"> R$1.500–R$5.000</label>
+                    <label class="option-item"><input type="radio" name="q28" value="+R$5.000"> +R$5.000</label>
+                </div>
+            </div>
+            <div class="question-group">
+                <label>Tipo de contrato:</label>
+                <select name="q29">
+                    <option value="Recorrentes">Contratos recorrentes</option>
+                    <option value="Pontuais">Projetos pontuais</option>
+                </select>
+            </div>
+            <div class="question-group">
+                <label>Escalabilidade:</label>
+                <select name="q30">
+                    <option value="Com equipe">Escalar com equipe</option>
+                    <option value="Enxuto">Ficar mais enxuto</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 7 -->
+        <div class="section">
+            <div class="section-title">7. Valores & Limites</div>
+            <div class="question-group">
+                <label>O que você não abre mão na sua empresa?</label>
+                <textarea name="q31"></textarea>
+            </div>
+            <div class="question-group">
+                <label>O que você nunca faria só por dinheiro?</label>
+                <textarea name="q32"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Qual tipo de trabalho te desanima?</label>
+                <textarea name="q33"></textarea>
+            </div>
+            <div class="question-group">
+                <label>O que você quer evitar que essa empresa se torne?</label>
+                <textarea name="q34"></textarea>
+            </div>
+            <div class="question-group">
+                <label>O que faria você dizer "valeu a pena"?</label>
+                <textarea name="q35"></textarea>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 8 -->
+        <div class="section">
+            <div class="section-title">8. A Mais Importante</div>
+            <div class="question-group">
+                <label>Qual é o maior medo hoje em relação à empresa?</label>
+                <textarea name="q36"></textarea>
+            </div>
+            <div class="question-group">
+                <label>O que mais te trava para dar o próximo passo?</label>
+                <textarea name="q37"></textarea>
+            </div>
+            <div class="question-group">
+                <label>Se eu pudesse te ajudar em uma única coisa agora, o que seria?</label>
+                <textarea name="q38"></textarea>
+            </div>
+        </div>
+
+        <button type="button" onclick="generateSummary()">GERAR RESUMO PARA COPIAR</button>
+    </form>
+
+    <div id="result-container">
+        <h2>Seu Questionário Cambo</h2>
+        <p>Copie o texto abaixo e cole onde desejar:</p>
+        <textarea id="final-text" readonly></textarea>
+        <button class="copy-btn" onclick="copyToClipboard()">COPIAR TEXTO</button>
+    </div>
+</div>
+
+<script>
+    function generateSummary() {
+        const form = document.getElementById('quizForm');
+        let summary = "📋 QUESTIONÁRIO ESTRATÉGICO - CAMBO\n";
+        summary += "========================================\n\n";
+
+        const questions = [
+            "1. Por que você criou (ou quer criar) essa empresa?",
+            "2. O que você quer que as pessoas sintam quando veem sua marca?",
+            "3. Onde você quer que essa empresa esteja em 1 ano?",
+            "4. E em 5 anos?",
+            "5. Empresa pessoal ou institucional?",
+            "6. Quem é o cliente ideal hoje?",
+            "7. Que tipo de cliente você não quer atender?",
+            "8. Prefere poucos pagando mais ou muitos pagando menos?",
+            "9. O cliente entende de marketing ou é leigo?",
+            "10. Vem por urgência ou crescimento estratégico?",
+            "11. Serviços no curto prazo:",
+            "12. Serviço que mais gosta de executar:",
+            "13. Serviço que mais dá dinheiro hoje:",
+            "14. Especialista ou Full Service?",
+            "15. Execução ou Estratégia?",
+            "16. Personalidade da Marca:",
+            "17. Como a marca falaria (se fosse pessoa):",
+            "18. Estilo de comunicação:",
+            "19. Marcas que admira:",
+            "20. Diferencial da empresa:",
+            "21. Quer aparecer nos conteúdos?",
+            "22. Preferência de vídeos:",
+            "23. Objetivo do conteúdo:",
+            "24. Crescer por Autoridade ou Volume/Viral:",
+            "25. Rede social prioridade:",
+            "26. Canal de vendas principal:",
+            "27. Gosta de vender ou o conteúdo vende?",
+            "28. Ticket médio ideal:",
+            "29. Contratos recorrentes ou pontuais?",
+            "30. Escalar com equipe ou enxuto?",
+            "31. Do que não abre mão?",
+            "32. O que nunca faria por dinheiro?",
+            "33. Trabalho que desanima:",
+            "34. O que evitar que a empresa se torne?",
+            "35. O que faria valer a pena?",
+            "36. Maior medo hoje:",
+            "37. O que mais te trava:",
+            "38. Ajuda em uma única coisa:"
+        ];
+
+        // Processamento especial para Checkbox e Radio
+        const formData = new FormData(form);
+        
+        // Função para pegar valor por nome (lidando com múltiplos checkboxes)
+        function getVal(name, index) {
+            if (name === 'q16') { // Checkboxes
+                let checked = [];
+                document.querySelectorAll('input[name="q16"]:checked').forEach(el => checked.push(el.value));
+                return checked.join(', ') || "Não selecionado";
+            }
+            if (name === 'q28') { // Radio
+                return document.querySelector('input[name="q28"]:checked')?.value || "Não selecionado";
+            }
+            return formData.get(name) || "Não respondido";
+        }
+
+        const fields = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17','q18','q19','q20','q21','q22','q23','q24','q25','q26','q27','q28','q29','q30','q31','q32','q33','q34','q35','q36','q37','q38'];
+
+        fields.forEach((field, index) => {
+            summary += `❓ ${questions[index]}\n✅ R: ${getVal(field)}\n\n`;
+        });
+
+        document.getElementById('final-text').value = summary;
+        document.getElementById('result-container').style.display = 'block';
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function copyToClipboard() {
+        const textArea = document.getElementById('final-text');
+        textArea.select();
+        document.execCommand('copy');
+        alert('Copiado para a área de transferência!');
+    }
+</script>
+
+</body>
+</html>
